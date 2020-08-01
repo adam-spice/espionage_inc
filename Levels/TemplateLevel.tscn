@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Tiles/Tles.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/TemplateCharacter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://NPC/SecCamera.tscn" type="PackedScene" id=4]
 
 [node name="TemplateLevel" type="Node2D"]
 
@@ -22,5 +23,17 @@ color = Color( 0.290196, 0.290196, 0.290196, 1 )
 
 [node name="TemplateCharacter" parent="." instance=ExtResource( 3 )]
 position = Vector2( 245.611, -5.33936 )
+
+[node name="Cameras" type="Node" parent="."]
+
+[node name="SecCamera" parent="Cameras" instance=ExtResource( 4 )]
+position = Vector2( -310.254, -60.054 )
+
+[node name="SecCamera2" parent="Cameras" instance=ExtResource( 4 )]
+position = Vector2( 200.322, 135.5 )
+
+[node name="SecCamera3" parent="Cameras" instance=ExtResource( 4 )]
+position = Vector2( -350.395, -9.34389 )
+rotation = 1.5708
 
 [editable path="Player"]
