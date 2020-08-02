@@ -180,4 +180,6 @@ current = true
 
 [node name="Doors" type="Node" parent="."]
 
+[node name="LokedDoors" type="Node" parent="."]
+
 [editable path="Player"]
