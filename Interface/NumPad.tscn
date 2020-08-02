@@ -49,7 +49,6 @@ texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 100, 100 )
 
 [node name="NumPad" type="Popup"]
-visible = true
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 300, 400 )
