@@ -16,7 +16,10 @@ texture = ExtResource( 2 )
 
 [node name="NumPad" parent="CanvasLayer" index="0" instance=ExtResource( 3 )]
 
-[node name="Label" type="Label" parent="." index="5"]
+[node name="Label" type="Label" parent="." index="5" groups=[
+"labels",
+]]
+visible = false
 margin_left = -22.0
 margin_top = 24.5
 margin_right = 58.0
