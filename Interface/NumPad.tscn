@@ -49,6 +49,7 @@ texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 100, 100 )
 
 [node name="NumPad" type="Popup"]
+visible = true
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 300, 400 )
@@ -212,3 +213,9 @@ custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
 text = "OK"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

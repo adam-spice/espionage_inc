@@ -25,12 +25,18 @@ func Button_pressed(button):
 	
 func check_guess():
 	if guess == combination:
-		emit_signal("combination_correct")
+		$AudioStreamPlayer.stream = load("res://SFX/threeTone1.ogg")
+		$AudioStreamPlayer.play()
+		light.texture = load("res://GFX/Interface/PNG/dotGreen.png")
+		$Timer.start()
+		
+		
 	else:
 		reset_lock()
 	
 func enter(button):
-	print(button)
+	$AudioStreamPlayer.stream = load("res://SFX/twoTone1.ogg")
+	$AudioStreamPlayer.play()
 	guess.append(button)
 	update_display()
 	
@@ -39,6 +45,11 @@ func update_display():
 	
 	
 func reset_lock():
+	light.texture = load("res://GFX/Interface/PNG/dotRed.png")
 	display.text=""
 	guess.clear()
 
+
+func _on_Timer_timeout():
+	reset_lock()
+	emit_signal("combination_correct")

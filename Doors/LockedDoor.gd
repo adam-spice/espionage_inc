@@ -7,9 +7,9 @@ func _on_Door_input_event(_viewport, _event, _shape_idx):
 func _on_Door_body_exited(body):
 	if body.collision_layer == 1:
 		can_click = false
-		$CanvasLayer/NumPad.popup_hide()
+		$CanvasLayer/NumPad.hide()
 
 
 func _on_NumPad_combination_correct():
 	open()
-	$CavasLayer/NumPad.popup_hide()
+	$CanvasLayer/NumPad.hide()
