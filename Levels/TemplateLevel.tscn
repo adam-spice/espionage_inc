@@ -178,4 +178,6 @@ current = true
 
 [node name="Gaurds" type="Node" parent="."]
 
+[node name="Doors" type="Node" parent="."]
+
 [editable path="Player"]
