@@ -19,6 +19,8 @@ export var number_of_disguises = 3
 
 func _ready():
 	reveal()
+	get_tree().call_group("DisguiseDisplay", "update_disguises",
+			number_of_disguises)
 	$Timer.wait_time = disguise_duration
 
 
@@ -73,6 +75,8 @@ func disguise():
 	$LightOccluder2D.occluder = load(BOX_OCCLUDER)
 	$DisguiseLabel.visible = true
 	number_of_disguises -= 1
+	get_tree().call_group("DisguiseDisplay", "update_disguises",
+			number_of_disguises)
 	velocity_multiplier = disguise_slowdown
 	disguised = true
 	collision_layer = 16
