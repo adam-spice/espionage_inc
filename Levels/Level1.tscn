@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Levels/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/NPC/SecCamera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Doors/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Doors/LockedDoor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Computer/Computer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Loot/Briefcase.tscn" type="PackedScene" id=7]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -102,6 +103,9 @@ rotation = 1.5708
 position = Vector2( -680, -168 )
 rotation = -1.57079
 lock_group = "1"
+
+[node name="Briefcase" parent="Loot" index="0" instance=ExtResource( 7 )]
+position = Vector2( 647.71, -574.171 )
 [connection signal="combination" from="Computers/Computer" to="LokedDoors/LockedDoor" method="_on_Computer_combination"]
 
 [editable path="Player"]
