@@ -47,7 +47,7 @@ collision_mask = 5
 tile_data = PoolIntArray( -131084, 2, 0, -131083, 3, 0, -131082, 4, 0, 65551, 1610612740, 0, 65552, 1610612739, 0, 65553, 1610612739, 0, 65554, 1610612739, 0, 65555, 1610612738, 0, 393232, 1, 0 )
 
 [node name="Player" parent="." index="1"]
-position = Vector2( 56.8112, 16.4217 )
+position = Vector2( -403.412, -245.204 )
 
 [node name="SecCamera" parent="Cameras" index="0" instance=ExtResource( 2 )]
 position = Vector2( 329.914, 223.47 )

@@ -2,10 +2,34 @@ extends "res://Characters/TemplateCharacter.gd"
 
 var motion = Vector2.ZERO
 
+const PLAYER_SPRITE = "res://GFX/PNG/Hitman 1/hitman1_stand.png"
+const PLAYER_LIGHT = "res://GFX/PNG/Hitman 1/hitman1_stand.png"
+const PLAYER_OCCLUDER = "res://Characters/HumanOccluder.tres"
+
+const BOX_SPRITE = "res://GFX/PNG/Tiles/tile_130.png"
+const BOX_LIGHT = "res://GFX/PNG/Tiles/tile_130.png"
+const BOX_OCCLUDER = "res://Characters/BoxOccluder.tres"
+
+var velocity_multiplier = 1
+var disguised = false
+
+export var disguise_duration = 5
+export var disguise_slowdown = 0.25
+export var number_of_disguises = 3
+
+func _ready():
+	reveal()
+	get_tree().call_group("DisguiseDisplay", "update_disguises",
+			number_of_disguises)
+	$Timer.wait_time = disguise_duration
+
+
 func _physics_process(_delta):
 	update_movement()
-	move_and_slide(motion)
-	
+	move_and_slide(motion * velocity_multiplier)
+	if disguised:
+		$DisguiseLabel.text = str($Timer.time_left).pad_decimals(2)
+		$DisguiseLabel.rect_rotation = -rotation_degrees
 	
 func update_movement():
 	look_at(get_global_mouse_position())
@@ -26,3 +50,48 @@ func update_movement():
 func _input(event):
 	if Input.is_action_pressed("toggle_vision_mode"):
 		get_tree().call_group("Interface", "cycle_vision_mode")
+
+	if Input.is_action_just_pressed("toggle_disguise"):
+		toggle_disguise()
+		
+func toggle_disguise():
+	if(disguised):
+		reveal()
+	elif number_of_disguises > 0:
+		disguise()
+		
+func reveal():
+	$Sprite.texture = load(PLAYER_SPRITE)
+	$Light2D.texture = load(PLAYER_LIGHT)
+	$LightOccluder2D.occluder = load(PLAYER_OCCLUDER)
+	$DisguiseLabel.visible = false
+	velocity_multiplier = 1
+	disguised = false
+	collision_layer = 1
+	
+func disguise():
+	$Sprite.texture = load(BOX_SPRITE)
+	$Light2D.texture = load(BOX_LIGHT)
+	$LightOccluder2D.occluder = load(BOX_OCCLUDER)
+	$DisguiseLabel.visible = true
+	number_of_disguises -= 1
+	get_tree().call_group("DisguiseDisplay", "update_disguises",
+			number_of_disguises)
+	velocity_multiplier = disguise_slowdown
+	disguised = true
+	collision_layer = 16
+	$Timer.start()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+func _on_Timer_timeout():
+	reveal()
