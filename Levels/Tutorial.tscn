@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Levels/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Lightmaps/torchmap.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://SFX/message.wav" type="AudioStream" id=7]
 [ext_resource path="res://Interface/TutorialGUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Interface/MessageTemplate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/NPC/SecCamera.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
@@ -21,6 +22,9 @@ tile_data = PoolIntArray( -720895, 1, 0, -720894, 1, 2, -720893, 1, 2, -720892, 
 
 [node name="Player" parent="." index="1"]
 position = Vector2( -356.808, -182.208 )
+
+[node name="SecCamera" parent="Cameras" index="0" instance=ExtResource( 10 )]
+position = Vector2( 135.983, 313.254 )
 
 [node name="Door" parent="Doors" index="0" instance=ExtResource( 3 )]
 position = Vector2( 217.949, -250.408 )
@@ -60,17 +64,9 @@ texture = ExtResource( 2 )
 offset = Vector2( 300, 0 )
 energy = 0.5
 shadow_enabled = true
+shadow_item_cull_mask = 0
 
-[node name="Light2D3" type="Light2D" parent="." index="14"]
-position = Vector2( 188.337, 477.479 )
-rotation = -1.04153
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 2 )
-offset = Vector2( 300, 0 )
-energy = 0.75
-shadow_enabled = true
-
-[node name="ObjectiveAreas" type="Node" parent="." index="15"]
+[node name="ObjectiveAreas" type="Node" parent="." index="14"]
 
 [node name="MoveObjective" type="Area2D" parent="ObjectiveAreas" index="0"]
 position = Vector2( 134.38, -105.839 )
@@ -112,7 +108,7 @@ __meta__ = {
 position = Vector2( -161.732, -88.0014 )
 shape = SubResource( 1 )
 
-[node name="ObjectivePositions" type="Node" parent="." index="16"]
+[node name="ObjectivePositions" type="Node" parent="." index="15"]
 
 [node name="MoveObjective" type="Position2D" parent="ObjectivePositions" index="0"]
 position = Vector2( 31.3228, -186.39 )
@@ -129,19 +125,25 @@ position = Vector2( 370.432, 133.727 )
 [node name="ExitObjective" type="Position2D" parent="ObjectivePositions" index="4"]
 position = Vector2( 762.876, 269.491 )
 
-[node name="ObjectiveMessages" type="Node" parent="." index="17"]
+[node name="ObjectiveMessages" type="Node" parent="." index="16"]
 
 [node name="WelcomeMessage" parent="ObjectiveMessages" index="0" instance=ExtResource( 9 )]
+message = "Welecome to your first day of training at Espionage Inc.
+Please proceed to the objective marker using the [W], [A], [S], [D] keys to move."
 
 [node name="DoorMessage" parent="ObjectiveMessages" index="1" instance=ExtResource( 9 )]
+message = "Excellent!! Now practice interacting with objects, stand close to the door and click on it with the left mouse button."
 
 [node name="NightvisionMessage" parent="ObjectiveMessages" index="2" instance=ExtResource( 9 )]
+message = "You'll be working in the dark alot so we have provided you with an T.O.U.C.A.N nightvision module. Press the space bar to activate/deactivate it."
 
 [node name="LootMessage" parent="ObjectiveMessages" index="3" instance=ExtResource( 9 )]
+message = "Before you can leave you will grab the loot, but watch out fo the security camera. Luckily, you have a handy disguise, press the [E] keey to activate it."
 
 [node name="ExitMessage" parent="ObjectiveMessages" index="4" instance=ExtResource( 9 )]
+message = "GET TO THE CHOPPA!! Sorry got a bit carried away there. Once you have the loot proceed to the exit."
 
-[node name="ObjectivePointer" type="Sprite" parent="." index="18"]
+[node name="ObjectivePointer" type="Sprite" parent="." index="17"]
 position = Vector2( -318.707, -178.381 )
 z_index = 2
 texture = ExtResource( 5 )
@@ -152,13 +154,13 @@ __meta__ = {
 [node name="Light2D" type="Light2D" parent="ObjectivePointer" index="0"]
 texture = ExtResource( 5 )
 
-[node name="Tween" type="Tween" parent="." index="19"]
+[node name="Tween" type="Tween" parent="." index="18"]
 
-[node name="MessageSound" type="AudioStreamPlayer" parent="." index="20"]
+[node name="MessageSound" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource( 7 )
 volume_db = -10.0
 
-[node name="TutorialGUI" parent="." index="21" instance=ExtResource( 8 )]
+[node name="TutorialGUI" parent="." index="20" instance=ExtResource( 8 )]
 [connection signal="body_entered" from="ObjectiveAreas/MoveObjective" to="." method="_on_MoveObjective_body_entered"]
 [connection signal="body_entered" from="ObjectiveAreas/DoorObjective" to="." method="_on_DoorObjective_body_entered"]
 [connection signal="body_entered" from="ObjectiveAreas/NightVisionObjective" to="." method="_on_NightVisionObjective_body_entered"]
